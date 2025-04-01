@@ -1,5 +1,6 @@
 package org.codenova.moneylog.entity;
 
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User {
     private int id;
+    @Email
     private String email;
     private String password;
     private String nickname;
