@@ -7,18 +7,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.codenova.moneylog.Vo.KakaoTokenResponse;
+import org.codenova.moneylog.entity.User;
+import org.codenova.moneylog.repository.UserRepository;
 import org.codenova.moneylog.service.KakaoApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @Controller
 @RequestMapping("/auth")
 @Slf4j
 public class AuthController {
+    private final UserRepository userRepository;
     private KakaoApiService kakaoApiService;
 
     @GetMapping("/login")
@@ -30,6 +31,25 @@ public class AuthController {
 
         return "auth/login";
     }
+
+    @GetMapping("/signup")
+    public String signUpHandle(Model model) {
+
+
+        return"auth/signup";
+}
+
+@PostMapping("/signup")
+public String signUpPostHandle(@ModelAttribute User user) {
+    User found = userRepository.findByEmail(user.getEmail());
+    if (found == null) {
+        user.setProvider("LOCAL");
+        user.setVerified("F");
+        userRepository.save(user);
+    }
+    return "redirect:/index";
+}
+
 
 
     @GetMapping("/kakao/callback")
