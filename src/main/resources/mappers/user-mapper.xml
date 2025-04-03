@@ -13,4 +13,7 @@
     <select id="findByProviderAndProviderId" resultType="user">
         select * from users where provider=#{provider} and provider_id=#{providerId}
     </select>
+    <update id="updateVerifiedByEmail">
+            update users set verified='T' where email=#{email }
+    </update>
 </mapper>

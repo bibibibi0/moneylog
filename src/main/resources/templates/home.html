@@ -2,13 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>money log</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머니로그 - 당신의 돈을 기록하세요</title>
 </head>
 <body>
 <div>
-  <div style="text-align: right">
-    <span th:text="${user.nickname}"></span> (<small th:text="${user.provider}"></small>
+    <div style="text-align: right">
+        <span th:text="${user.nickname}"></span> (<small th:text="${user.provider}"></small>)
+        <span th:if="${user.verified=='T'}">인증</span>
+        <span th:if="${user.verified=='F'}">인증 필요</span>
+    </div>
   </div>
-</div>
+
 </body>
 </html>

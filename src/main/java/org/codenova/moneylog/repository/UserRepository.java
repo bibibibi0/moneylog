@@ -10,4 +10,7 @@ public interface UserRepository {
     public User findByEmail(String email);
     public User findByProviderAndProviderId(@Param("provider") String provider,
                                             @Param("providerId") String providerId);
+    public int updatePasswordByEmail(@Param("email") String email, @Param("password") String password);
+
+    public int updateVerifiedByEmail(@Param("email") String email);
     }

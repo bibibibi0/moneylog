@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.codenova.moneylog.Vo.NaverProfileResponse;
-import org.codenova.moneylog.Vo.NaverTokenResponse;
+import org.codenova.moneylog.vo.NaverProfileResponse;
+import org.codenova.moneylog.vo.NaverTokenResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 @AllArgsConstructor
 @Slf4j
 public class NaverApiService {
-
     private ObjectMapper objectMapper;
 
     public NaverTokenResponse exchangeToken(String code, String state) throws JsonProcessingException {
@@ -26,19 +25,17 @@ public class NaverApiService {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
-        body.add("client_id", "ZCHHLlkTUUZiafrmF7FK");
-        body.add("client_secret", "AKSGOy1NOQ");
+        body.add("client_id", "aYEz34PADGSVOtamYGHb");
+        body.add("client_secret", "QrAuiosuvd");
         body.add("code", code);
         body.add("state", state);
-
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange("https://nid.naver.com/oauth2.0/token",
+        ResponseEntity<String> response =restTemplate.exchange("https://nid.naver.com/oauth2.0/token",
                 HttpMethod.POST,
                 new HttpEntity<>(body, headers),
                 String.class
         );
-        // 확인 완료라 주석검 log.info("response {}", response.getBody());
-
+        // log.info("response {}", response.getBody());
         return objectMapper.readValue(response.getBody(), NaverTokenResponse.class);
     }
 
@@ -52,12 +49,11 @@ public class NaverApiService {
                 HttpMethod.GET,
                 new HttpEntity<>(body, headers),
                 String.class
-                );
-        //확인 완료 log.info("profile = {}", response.getBody());
+        );
 
+        //log.info("profile = {}", response.getBody());
         String extractJson = objectMapper.readTree(response.getBody()).path("response").toString();
 
         return objectMapper.readValue(extractJson, NaverProfileResponse.class);
-
     }
 }
