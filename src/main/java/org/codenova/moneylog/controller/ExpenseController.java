@@ -24,12 +24,15 @@ public class ExpenseController {
     @Autowired
     private ExpenseRepository expenseRepository;
 
+
     @GetMapping("/history")
     public String historyFindHandle(@SessionAttribute("user")User user, Model model) {
         List<Category> categories = categoryRepository.findAll();
         model.addAttribute("now", LocalDate.now());
         model.addAttribute("categories", categories);
         model.addAttribute("expenses", expenseRepository.findWithCategoryByUserId(user.getId()));
+       // model.addAttribute("expenses", expenseRepository.findByUserIdAndDuration(user.getId()
+       // ,LocalDate.now().minusDays(10), LocalDate.now()));
 
         return "expense/history";
     }
