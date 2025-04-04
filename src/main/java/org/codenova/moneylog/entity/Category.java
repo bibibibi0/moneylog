@@ -7,5 +7,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Expenses {
+public class Category {
+    private int id;
+    private int sort;
+    private String name;
 }

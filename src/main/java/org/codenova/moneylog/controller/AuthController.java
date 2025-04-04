@@ -109,7 +109,7 @@ public class AuthController {
             session.setAttribute("user", user);
         }
 
-        log.info("decodedJWT: sub={}, nickname={}, picture={}", sub, nickname, picture);
+        //log.info("decodedJWT: sub={}, nickname={}, picture={}", sub, nickname, picture);
         return "redirect:/index";
     }
 

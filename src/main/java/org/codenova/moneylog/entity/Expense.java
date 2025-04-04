@@ -1,0 +1,21 @@
+package org.codenova.moneylog.entity;
+
+import lombok.*;
+
+import java.time.LocalDate;
+
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class Expense {
+    private int id;
+    private int userId;
+    private LocalDate expenseDate;
+    private String description;
+    private long amount;
+    private int categoryId;
+    private String name;
+}
