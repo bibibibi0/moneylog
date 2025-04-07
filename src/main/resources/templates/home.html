@@ -52,7 +52,11 @@
             <div style="font-weight: bold;" th:if="${#arrays.isEmpty(categoryExpenses)}">
                 <span>이번 주의 지출 내용이 아직 비어있어요!</span>
             </div>
-
+            <div style="margin-top: 20px;">
+                <a href="/expense/history" style="font-size: 13px;color: #007bff;text-decoration: none;">
+                    ➤ 전체 지출 보기
+                </a>
+            </div>
         </div>
 
     </div>

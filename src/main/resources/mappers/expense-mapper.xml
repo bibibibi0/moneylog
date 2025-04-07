@@ -39,5 +39,24 @@
         group by category_id) as t join categorys on t.category_id = categorys.id
         order by total desc
     </select>
-
+    <select id="getCategoryExpenseByUserIdOrderByCategoryId" resultType="expenseWithCategory">
+        select categorys.id as categort_id, ifnull(t.total, 0) as total, categorys.name as category_name from (
+        select category_id, sum(amount) as total from expenses
+        where user_id=#{userId} and expense_date between #{startDate} and #{endDate}
+        group by category_id
+        ) as t right join categorys on t.category_id = categorys.id
+        order by total desc
+    </select>
+    <select id="getCategoryExpenseByUserIdOrderByCateId" resultType="expenseWithCategory">
+        select * from (select category_id, count(*) as cnt from expenses
+        group by category_id order by cnt desc)
+        as temp right join categorys on temp.category_id = categorys.id
+        order by category_id asc
+    </select>
+<select id="getDailyExpenseByUserIdAndPeriod" resultType="dailyExpense">
+    select expense_date, sum(amount) as total from expenses
+    where user_id=#{userId} and expense_date between #{startDate} and #{endDate}
+    group by expense_date
+    order by expense_date asc
+</select>
 </mapper>
