@@ -50,7 +50,7 @@ public class LocalDateTest {
     }
     @Test
     public void test2(){
-        LocalDate today = LocalDate.of(2024,2,21);
+        LocalDate today = LocalDate.now();
         System.out.println(today.getDayOfMonth());
         System.out.println(today.minusDays(today.getDayOfMonth() - 1));
         System.out.println(today.plusMonths(1).minusDays(today.getDayOfMonth()));

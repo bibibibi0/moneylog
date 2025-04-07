@@ -12,8 +12,8 @@
     <h2 style="margin: 0;">머니로그</h2>
     <div style="display: inline-flex; align-items: center; gap: 6px;">
         <div style="font-weight: bold;"><span th:text="${user.nickname}"></span></div>
-        <span style="color: blue" th:text="${user.provider} +  ' /인증'" th:if="${user.verified ==  'T'}"></span>
-        <span style="color: #b91c1c" th:text="${user.provider} +  ' /미인증'" th:if="${user.verified ==  'F'}"></span>
+        <span style="color: blue" th:text="${session.user.provider} +  ' /인증'" th:if="${session.user.verified ==  'T'}"></span>
+        <span style="color: #b91c1c" th:text="${session.user.provider} +  ' /미인증'" th:if="${session.user.verified ==  'F'}"></span>
     </div>
 </div>
 
